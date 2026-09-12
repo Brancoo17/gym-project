@@ -18,6 +18,11 @@ if($mensaje):
         <i class="fa-solid fa-triangle-exclamation"></i>
         <span>No se puede eliminar este plan porque tiene clientes o membresías asociadas en el historial. Podés desactivarlo desde "Editar" para que no esté disponible para nuevos alumnos.</span>
     </div>
+<?php elseif(($error ?? '') === 'csrf'): ?>
+    <div class="alerta error">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Solicitud no válida o token de seguridad expirado. Por favor, intentá nuevamente.</span>
+    </div>
 <?php endif; ?>
 
 <a class="boton" href="/admin/planes/crear">
@@ -66,6 +71,7 @@ if($mensaje):
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         <form method="POST" action="/admin/planes/eliminar" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este plan?');">
+                            <?php echo csrfCampo(); ?>
                             <input type="hidden" name="id" value="<?php echo $plan->id; ?>">
                             <button type="submit" class="btn-micro btn-micro--eliminar" title="Eliminar Plan">
                                 <i class="fa-solid fa-trash-can"></i>
