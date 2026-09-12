@@ -1,0 +1,91 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+    margin: 3rem 0;
+    background-color: v.$blanco;
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.5rem;
+    text-align: left;
+
+    thead {
+        background-color: v.$gris-oscuro;
+        color: v.$blanco;
+
+        th {
+            padding: 1.4rem 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            letter-spacing: 0.05rem;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid color.adjust(v.$gris-borde, $lightness: 35%);
+            transition: background-color 0.2s ease;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover {
+                background-color: v.$fondo-suave;
+            }
+        }
+
+        td {
+            padding: 1.4rem 1.6rem;
+            vertical-align: middle;
+        }
+    }
+
+    &__thumb {
+        width: 6rem;
+        height: 4.5rem;
+        object-fit: cover;
+        border-radius: 0.4rem;
+    }
+
+    &__acciones {
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+
+        form {
+            margin: 0;
+        }
+    }
+
+    &__th--centro,
+    &__td--centro {
+        text-align: center;
+    }
+
+    &__th--id {
+        width: 6rem;
+        text-align: center;
+    }
+
+    &__td--id {
+        width: 6rem;
+        text-align: center;
+        font-weight: 700;
+        color: #94a3b8;
+    }
+
+    &__th--acciones {
+        text-align: center;
+        width: 15rem;
+    }
+}

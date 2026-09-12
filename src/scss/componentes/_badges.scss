@@ -1,0 +1,127 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+// Badges generales del sistema
+.badge {
+    padding: 0.4rem 1rem;
+    border-radius: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+
+    &--verde {
+        background-color: #dcfce7;
+        color: #15803d;
+        border: 1px solid rgba(22, 163, 74, 0.25);
+    }
+
+    &--rojo {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid rgba(220, 38, 38, 0.25);
+    }
+
+    &--amarillo {
+        background-color: #fef9c3;
+        color: #a16207;
+        border: 1px solid rgba(202, 138, 4, 0.25);
+    }
+
+    &--azul {
+        background-color: #dbeafe;
+        color: #1d4ed8;
+        border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+
+    &--celeste {
+        background-color: #e0f2fe;
+        color: #0284c7;
+        border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    &--naranja {
+        background-color: #ffedd5;
+        color: #c2410c;
+        border: 1px solid rgba(234, 88, 12, 0.25);
+    }
+}
+
+.badge-asistencia {
+    padding: 0.4rem 1rem;
+    border-radius: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &--presente {
+        background: rgba(20, 155, 43, 0.15);
+        color: v.$primario;
+        border: 1px solid rgba(20, 155, 43, 0.3);
+    }
+
+    &--ausente {
+        background: rgba(239, 68, 68, 0.12);
+        color: v.$rojo-error;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    &--cancelada {
+        background: #f1f5f9;
+        color: #64748b;
+    }
+
+    &--pendiente {
+        background: #f8fafc;
+        color: #64748b;
+        border: 1px solid #e2e8f0;
+        font-weight: 600;
+    }
+}
+
+// Badge de asistencia confirmada en tarjetas
+.badge-asistencia-confirmada {
+    background: rgba(20, 155, 43, 0.15);
+    color: v.$primario;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 0.35rem 0.8rem;
+    border-radius: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+// Mensaje en pie de tarjeta cuando la asistencia ya fue tomada
+.mensaje-asistencia-confirmada {
+    text-align: center;
+    padding: 0.8rem 1rem;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 0.6rem;
+    color: #166534;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+// Etiqueta de descripción de turno
+.tag-descripcion {
+    color: #64748b;
+    font-size: 1.35rem;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+
+    i {
+        color: v.$acento-azul;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+}

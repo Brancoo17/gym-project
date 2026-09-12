@@ -1,0 +1,88 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.boton {
+    @include m.boton(v.$primario, v.$blanco);
+
+    &:hover {
+        background-color: v.$primario-hover;
+    }
+
+    &--secundario {
+        @include m.boton(v.$secundario, v.$blanco);
+        &:hover {
+            background-color: color.adjust(v.$secundario, $lightness: -10%);
+        }
+    }
+
+    &--block {
+        display: block;
+        width: 100%;
+    }
+}
+
+.boton-accion {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+    background-color: v.$acento-azul;
+    color: v.$blanco;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: color.adjust(v.$acento-azul, $lightness: -10%);
+    }
+
+    &--eliminar {
+        background-color: v.$rojo-error;
+        &:hover {
+            background-color: color.adjust(v.$rojo-error, $lightness: -10%);
+        }
+    }
+}
+
+// Botones de acciones compactos (tablas)
+.btn-micro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 0.8rem;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+
+    &--editar {
+        background-color: #e0f2fe;
+        color: #0284c7;
+
+        &:hover {
+            background-color: #0284c7;
+            color: v.$blanco;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+        }
+    }
+
+    &--eliminar {
+        background-color: #fee2e2;
+        color: #dc2626;
+
+        &:hover {
+            background-color: #dc2626;
+            color: v.$blanco;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
+        }
+    }
+}
+

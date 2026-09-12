@@ -1,0 +1,322 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.sidebar {
+    background-color: v.$gris-oscuro;
+    color: v.$blanco;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 100;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Cabecera fija (siempre visible en móvil y desktop)
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid v.$gris-borde;
+        background-color: v.$gris-oscuro;
+    }
+
+    &__logo-contenedor {
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        color: v.$blanco;
+        font-size: 2.2rem;
+        font-weight: 900;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    &__logo-texto {
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 0.1rem;
+        color: v.$blanco;
+    }
+
+    &__logo-img {
+        max-height: 4rem;
+        max-width: 16rem;
+        object-fit: contain;
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    &__logo-icono-mini {
+        display: none;
+        font-size: 2.4rem;
+        color: v.$primario;
+    }
+
+    // Botón para desplegar / colapsar
+    &__toggle {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid v.$gris-borde;
+        color: v.$blanco;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+
+        &:hover {
+            background: v.$primario;
+            border-color: v.$primario;
+            color: v.$blanco;
+            transform: scale(1.05);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(v.$primario, 0.4);
+        }
+    }
+
+    // Contenedor colapsable
+    &__colapsable {
+        display: none; // Oculto por defecto en móvil
+        flex-direction: column;
+        padding: 2rem;
+        background-color: v.$gris-oscuro;
+    }
+
+    // Desplegado en móvil
+    &--abierto {
+        .sidebar__colapsable {
+            display: flex;
+        }
+    }
+
+    // Identificación de usuario
+    &__usuario {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid v.$gris-borde;
+    }
+
+    &__usuario-icono {
+        font-size: 3.2rem;
+        color: v.$gris-claro;
+        flex-shrink: 0;
+    }
+
+    &__usuario-info {
+        overflow: hidden;
+    }
+
+    &__nombre {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: v.$blanco;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &__rol {
+        display: inline-block;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: v.$primario;
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+    }
+
+    // Menú de navegación
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        padding-bottom: 2rem;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            color: color.adjust(v.$gris-claro, $lightness: 10%);
+            font-size: 1.45rem;
+            font-weight: 600;
+            padding: 1.1rem 1.4rem;
+            border-radius: 0.8rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+
+            i {
+                font-size: 1.7rem;
+                width: 2.2rem;
+                text-align: center;
+                flex-shrink: 0;
+                color: v.$gris-claro;
+                transition: color 0.2s ease;
+            }
+
+            span {
+                transition: opacity 0.2s ease;
+            }
+
+            &:hover {
+                background-color: v.$gris-medio;
+                color: v.$blanco;
+
+                i {
+                    color: v.$primario;
+                }
+            }
+
+            &.activo {
+                background-color: rgba(20, 155, 43, 0.18);
+                color: v.$primario;
+                font-weight: 700;
+                border-left: 3px solid v.$primario;
+
+                i {
+                    color: v.$primario;
+                }
+            }
+        }
+
+        .sidebar__nav-logout {
+            margin-top: 1.2rem;
+            border-top: 1px solid v.$gris-borde;
+            padding-top: 1.4rem !important;
+            color: #f87171 !important;
+
+            i {
+                color: #f87171 !important;
+            }
+
+            &:hover {
+                background-color: rgba(239, 68, 68, 0.15) !important;
+                color: #ef4444 !important;
+
+                i {
+                    color: #ef4444 !important;
+                }
+            }
+        }
+    }
+
+    // ==================================================
+    // MODO ESCRITORIO / TABLET (AL COSTADO)
+    // ==================================================
+    @include m.tablet {
+        height: 100vh;
+        max-height: 100vh;
+        width: 28rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: v.$gris-borde transparent;
+
+        &::-webkit-scrollbar {
+            width: 0.6rem;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: v.$gris-borde;
+            border-radius: 0.4rem;
+
+            &:hover {
+                background-color: v.$primario;
+            }
+        }
+
+        &__header {
+            padding: 2.2rem 2rem;
+        }
+
+        &__colapsable {
+            display: flex !important; // En escritorio siempre está visible el contenido
+            padding: 2rem;
+            flex: 1;
+        }
+
+        // Estado Colapsado en Escritorio
+        &--colapsada {
+            width: 7.5rem;
+
+            .sidebar__header {
+                padding: 1.8rem 1rem;
+                justify-content: center;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .sidebar__logo-img,
+            .sidebar__logo-texto {
+                display: none;
+            }
+
+            .sidebar__logo-icono-mini {
+                display: block;
+            }
+
+            .sidebar__usuario {
+                justify-content: center;
+                padding-bottom: 1rem;
+            }
+
+            .sidebar__usuario-info {
+                display: none;
+            }
+
+            .sidebar__colapsable {
+                padding: 1.5rem 0.8rem;
+            }
+
+            .sidebar__nav {
+                a {
+                    padding: 1.2rem 0;
+                    justify-content: center;
+                    position: relative;
+
+                    span {
+                        display: none;
+                    }
+
+                    i {
+                        font-size: 2rem;
+                        width: auto;
+                    }
+
+                    &.activo {
+                        border-left: none;
+                        border-radius: 0.8rem;
+                    }
+                }
+
+                .sidebar__nav-logout {
+                    margin-top: 1rem;
+                    padding-top: 1.2rem !important;
+                }
+            }
+        }
+    }
+}

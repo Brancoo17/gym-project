@@ -1,0 +1,60 @@
+@use 'sass:color';
+@use 'variables' as v;
+@use 'mixins' as m;
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /* 1rem = 10px */
+    scroll-behavior: smooth;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: v.$fuente_principal;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    background-color: v.$fondo-suave;
+    color: v.$texto-oscuro;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.contenedor {
+    width: 92%;
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.seccion {
+    padding: 6rem 0;
+
+    @include m.tablet {
+        padding: 8rem 0;
+    }
+
+    &--alt {
+        background-color: color.adjust(v.$fondo-suave, $lightness: -2%);
+    }
+
+    &__intro {
+        text-align: center;
+        color: v.$gris-claro;
+        margin-top: -1.5rem;
+        margin-bottom: 4rem;
+        font-size: 1.7rem;
+    }
+}

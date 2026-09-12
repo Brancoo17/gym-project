@@ -1,0 +1,58 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.grid-planes {
+    @include m.grid(1, 3rem);
+
+    @include m.tablet {
+        @include m.grid(2, 3rem);
+    }
+
+    @include m.desktop {
+        @include m.grid(3, 2rem);
+    }
+}
+
+.card-plan {
+    @include m.card;
+    display: flex;
+    flex-direction: column;
+    border-top: 4px solid v.$primario;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    img {
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+    }
+
+    &__info {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        h3 {
+            margin-bottom: 1rem;
+            color: v.$negro;
+        }
+
+        p {
+            color: v.$gris-claro;
+            flex-grow: 1;
+            font-size: 1.5rem;
+        }
+    }
+
+    &__precio {
+        font-size: 2.2rem !important;
+        font-weight: 900;
+        color: v.$primario !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 0 !important;
+    }
+}

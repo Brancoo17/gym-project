@@ -1,0 +1,136 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+// Grid de la sección Mi Cuenta
+.cuenta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 1rem;
+
+    @include m.desktop {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+// Fila de dos campos juntos (Nombre y Apellido)
+.cuenta-campos-doble {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include m.telefono {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .campo {
+        margin: 0;
+    }
+}
+
+// Badge de rol
+.cuenta-rol-badge-box {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 1.6rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.cuenta-rol-label {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.cuenta-rol-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    padding: 0.4rem 1.2rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+
+    &--admin {
+        background: rgba(20, 155, 43, 0.15);
+        color: v.$primario;
+        border: 1px solid rgba(20, 155, 43, 0.35);
+    }
+
+    &--entrenador {
+        background: rgba(14, 165, 233, 0.15);
+        color: v.$acento-azul;
+        border: 1px solid rgba(14, 165, 233, 0.35);
+    }
+
+    &--cliente {
+        background: rgba(255, 87, 34, 0.15);
+        color: v.$secundario;
+        border: 1px solid rgba(255, 87, 34, 0.35);
+    }
+}
+
+// Acciones del formulario de cuenta
+.cuenta-form-accion {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-start;
+
+    .boton {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.45rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+}
+
+// Estilos interactivos para el bloque de usuario en la barra lateral
+.sidebar__usuario {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    border-radius: 0.8rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+
+        .sidebar__usuario-icono {
+            color: v.$primario;
+        }
+
+        .sidebar__usuario-gear {
+            color: v.$primario;
+            transform: rotate(45deg);
+        }
+    }
+
+    &.activo {
+        background-color: rgba(20, 155, 43, 0.18);
+        border: 1px solid rgba(20, 155, 43, 0.35);
+
+        .sidebar__usuario-icono,
+        .sidebar__usuario-gear {
+            color: v.$primario;
+        }
+    }
+}
+
+.sidebar__usuario-gear {
+    margin-left: auto;
+    font-size: 1.6rem;
+    color: v.$gris-claro;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}

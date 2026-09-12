@@ -1,0 +1,729 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+// Contenedor general del formulario de configuración
+.config-form-contenedor {
+    max-width: 90rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+// Tarjeta modular de sección
+.config-seccion-card {
+    @include m.card;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    border-left: 5px solid v.$primario;
+
+    &--azul {
+        border-left-color: v.$acento-azul;
+    }
+
+    &--naranja {
+        border-left-color: v.$secundario;
+    }
+
+    &--morado {
+        border-left-color: #8b5cf6;
+    }
+
+    &--rojo {
+        border-left-color: #ef4444;
+    }
+
+    &__header {
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 1.5rem;
+
+        h3 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: v.$negro;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0 0 0.5rem 0;
+
+            i {
+                font-size: 2rem;
+            }
+        }
+
+        p {
+            font-size: 1.35rem;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.5;
+        }
+    }
+
+    &__cuerpo {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .campo {
+        margin: 0;
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: v.$negro;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid v.$gris-borde;
+            border-radius: 0.8rem;
+            font-family: v.$fuente_principal;
+            font-size: 1.5rem;
+            background-color: v.$blanco;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-sizing: border-box;
+
+            &:focus {
+                outline: none;
+                border-color: v.$primario;
+                box-shadow: 0 0 0 3px rgba(v.$primario, 0.15);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            line-height: 1.5;
+        }
+    }
+}
+
+.icono--morado {
+    color: #8b5cf6;
+}
+
+.icono--rojo {
+    color: #ef4444;
+}
+
+.campo-obligatorio {
+    color: #ef4444;
+    font-weight: 800;
+}
+
+.campo-ayuda {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 1.25rem;
+    color: #64748b;
+    margin-top: 0.8rem;
+    line-height: 1.4;
+
+    i {
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
+}
+
+// Layout de subida con previsualización
+.config-media-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+
+    @include m.tablet {
+        grid-template-columns: 28rem 1fr;
+    }
+}
+
+.config-preview-box {
+    background: #0f172a;
+    border: 2px dashed #cbd5e1;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+    &--logo {
+        height: 16rem;
+        background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+        padding: 1.5rem;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &--portada {
+        height: 18rem;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__img-oculta {
+        display: none;
+    }
+
+    &__placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        color: #64748b;
+        font-size: 1.3rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 1.5rem;
+
+        i {
+            font-size: 3.5rem;
+            color: #475569;
+        }
+    }
+
+    &__badge {
+        position: absolute;
+        bottom: 0.8rem;
+        right: 0.8rem;
+        background: rgba(15, 23, 42, 0.85);
+        color: v.$blanco;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.6rem;
+        backdrop-filter: blur(4px);
+    }
+}
+
+.config-media-controles {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    input[type="file"] {
+        width: 100%;
+        padding: 1.2rem 1.4rem;
+        border: 1px solid v.$gris-borde;
+        border-radius: 0.8rem;
+        font-family: v.$fuente_principal;
+        font-size: 1.5rem;
+        background-color: v.$blanco;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+            border-color: v.$primario;
+            box-shadow: 0 0 0 3px rgba(v.$primario, 0.15);
+        }
+    }
+
+    .campo {
+        margin: 0;
+    }
+}
+
+// Badge de sugerencia y recomendaciones técnicas
+.config-badge-recomendacion {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 1rem 1.4rem;
+    border-radius: 0.8rem;
+    font-size: 1.25rem;
+    color: #475569;
+    line-height: 1.5;
+
+    i {
+        color: v.$acento-azul;
+        font-size: 1.5rem;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+    }
+
+    strong {
+        color: v.$negro;
+    }
+}
+
+// Campos de Redes Sociales con Icono Integrado
+.campo-red-social {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    background: v.$blanco;
+
+    &:focus-within {
+        border-color: v.$primario;
+        box-shadow: 0 0 0 3px rgba(20, 155, 43, 0.15);
+    }
+
+    &__icono {
+        width: 4.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.9rem;
+        color: v.$blanco;
+        flex-shrink: 0;
+
+        &--instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        &--facebook {
+            background: #1877f2;
+        }
+
+        &--tiktok {
+            background: #010101;
+        }
+    }
+
+    &__input {
+        flex: 1;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 1.2rem 1.6rem !important;
+        font-size: 1.45rem !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+// Botonera de acciones
+.config-submit-bar {
+    position: sticky;
+    bottom: 2rem;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 1.8rem 2.5rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #64748b;
+        font-size: 1.35rem;
+        font-weight: 500;
+
+        i {
+            color: v.$primario;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+    }
+
+    .boton {
+        padding: 1.2rem 3rem;
+        font-size: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+}
+
+// Logo en header público y sidebar
+.header__logo-img {
+    max-height: 4.2rem;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.sidebar__logo-contenedor {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar__logo-img {
+    max-height: 4.2rem;
+    max-width: 16rem;
+    object-fit: contain;
+    display: block;
+}
+
+// Hero con portada de fondo
+.hero {
+    position: relative;
+    overflow: hidden;
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        opacity: 0.28;
+        filter: brightness(0.85);
+        pointer-events: none;
+    }
+
+    &__contenido {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+// Métodos de contacto directo en landing page
+.contacto-centro-contenedor {
+    max-width: 65rem;
+    margin: 3rem auto 0 auto;
+}
+
+.contacto-grid-landing {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+
+    @include m.tablet {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.contacto-info-card {
+    @include m.card;
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+
+    h3 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: v.$negro;
+        margin: 0;
+    }
+
+    p {
+        color: #64748b;
+        font-size: 1.45rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+.contacto-enlaces-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contacto-email-fila {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    @include m.telefono {
+        flex-wrap: nowrap;
+    }
+
+    .contacto-enlace-item--email {
+        flex: 1;
+        min-width: 22rem;
+    }
+}
+
+.btn-copiar-email {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem 1.8rem;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 1rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-family: v.$fuente_principal;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    i {
+        font-size: 1.6rem;
+    }
+
+    &:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    &--copiado {
+        background: #dcfce7 !important;
+        color: #15803d !important;
+        border-color: #86efac !important;
+    }
+}
+
+.contacto-redes-bloque {
+    margin-top: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.contacto-redes-titulo {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    margin: 0 0 1.2rem 0;
+}
+
+.contacto-enlace-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #1e293b;
+    font-size: 1.45rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+
+    i {
+        font-size: 2.2rem;
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    &--whatsapp {
+        color: #15803d;
+        border-color: #bbf7d0;
+        background: #f0fdf4;
+
+        i {
+            color: #16a34a;
+        }
+
+        &:hover {
+            background: #dcfce7;
+        }
+    }
+
+    &--email {
+        color: #0369a1;
+        border-color: #bae6fd;
+        background: #f0f9ff;
+
+        i {
+            color: #0284c7;
+        }
+
+        &:hover {
+            background: #e0f2fe;
+        }
+    }
+}
+
+// Barra de Redes Sociales en Footer y Contacto
+.redes-sociales-barra {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn-red-social {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: v.$blanco;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &--instagram {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    &--facebook {
+        background: #1877f2;
+    }
+
+    &--tiktok {
+        background: #010101;
+    }
+}
+
+// Módulos y Switches de Activación del Sistema
+.config-modulos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.config-modulo-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.2rem;
+    border-radius: 1.2rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: #cbd5e1;
+        background: #f1f5f9;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    &__info {
+        flex: 1;
+
+        h4 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: v.$negro;
+            margin: 0 0 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            i {
+                font-size: 1.6rem;
+                color: #8b5cf6;
+            }
+        }
+
+        p {
+            font-size: 1.35rem;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.5;
+
+            strong {
+                color: v.$negro;
+            }
+        }
+    }
+
+    &__control {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        padding-top: 0.3rem;
+    }
+}
+
+// Switch toggle moderno
+.switch-toggle {
+    position: relative;
+    display: inline-block;
+    width: 5.4rem;
+    height: 3rem;
+    cursor: pointer;
+
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked + .switch-slider {
+            background-color: v.$primario;
+
+            &::before {
+                transform: translateX(2.4rem);
+            }
+        }
+
+        &:focus + .switch-slider {
+            box-shadow: 0 0 0 3px rgba(20, 155, 43, 0.25);
+        }
+    }
+
+    .switch-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #cbd5e1;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 3.4rem;
+
+        &::before {
+            position: absolute;
+            content: "";
+            height: 2.4rem;
+            width: 2.4rem;
+            left: 0.3rem;
+            bottom: 0.3rem;
+            background-color: v.$blanco;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+

@@ -1,0 +1,19 @@
+@use '../base/variables' as v;
+
+.footer {
+    background-color: v.$negro;
+    color: v.$gris-claro;
+    padding: 3rem 0;
+    text-align: center;
+    font-size: 1.4rem;
+    margin-top: auto;
+
+    p {
+        margin: 0;
+    }
+
+    .redes-sociales-barra {
+        justify-content: center;
+        margin-bottom: 1.8rem;
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "branco/gym-mvc",
+    "description": "Sistema de gestión de gimnasio - PHP 8, MVC, SQL, SASS, Gulp, ActiveRecord",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models",
+            "Classes\\": "./classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Brancoo17",
+            "email": "brancoechazu@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^7.1",
+        "intervention/image": "^4.1",
+        "mercadopago/dx-php": "^3.16",
+        "vlucas/phpdotenv": "^5.7"
+    }
+}

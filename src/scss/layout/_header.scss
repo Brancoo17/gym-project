@@ -1,0 +1,122 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.header {
+    background-color: v.$negro;
+    padding: 1.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+    &__contenedor {
+        width: 92%;
+        max-width: 120rem;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+
+        @include m.tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 0;
+        }
+    }
+
+    &__logo {
+        color: v.$blanco;
+        font-size: 2.8rem;
+        font-weight: 900;
+        letter-spacing: 0.15rem;
+    }
+}
+
+.navegacion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+
+    @include m.tablet {
+        gap: 2.2rem;
+    }
+
+    a {
+        color: color.adjust(v.$gris-claro, $lightness: 15%);
+        font-size: 1.5rem;
+        font-weight: 700;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: v.$primario;
+        }
+    }
+
+    &__cta {
+        background-color: v.$primario;
+        color: v.$blanco !important;
+        padding: 0.8rem 1.8rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s ease !important;
+
+        &:hover {
+            background-color: v.$primario-hover !important;
+        }
+    }
+
+    &__enlace-panel {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        background-color: rgba(20, 155, 43, 0.15);
+        color: v.$primario !important;
+        border: 1px solid rgba(20, 155, 43, 0.4);
+        padding: 0.7rem 1.6rem;
+        border-radius: 2rem;
+        font-size: 1.45rem;
+        font-weight: 700;
+        transition: all 0.25s ease !important;
+
+        i {
+            font-size: 1.4rem;
+        }
+
+        &:hover {
+            background-color: v.$primario !important;
+            color: v.$blanco !important;
+            border-color: v.$primario !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(20, 155, 43, 0.3);
+        }
+    }
+
+    &__enlace-salir {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        background-color: rgba(239, 68, 68, 0.1);
+        color: #f87171 !important;
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        padding: 0.7rem 1.5rem;
+        border-radius: 2rem;
+        font-size: 1.45rem;
+        font-weight: 700;
+        transition: all 0.25s ease !important;
+
+        i {
+            font-size: 1.3rem;
+        }
+
+        &:hover {
+            background-color: #ef4444 !important;
+            color: v.$blanco !important;
+            border-color: #ef4444 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+    }
+}

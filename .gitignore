@@ -1,0 +1,8 @@
+/vendor/
+/node_modules/
+/public/build/css/*.map
+/public/imagenes/*
+!/public/imagenes/.gitkeep
+includes/mail.php
+.DS_Store
+.env

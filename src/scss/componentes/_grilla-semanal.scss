@@ -1,0 +1,416 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+// Selector de días en el formulario (Chips)
+.dias-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.dia-chip {
+    cursor: pointer;
+    margin: 0 !important;
+
+    input[type="checkbox"] {
+        display: none;
+
+        &:checked + span {
+            background-color: v.$primario;
+            color: v.$blanco;
+            border-color: v.$primario;
+            box-shadow: 0 2px 8px rgba(v.$primario, 0.35);
+        }
+    }
+
+    span {
+        display: inline-block;
+        padding: 0.8rem 1.6rem;
+        background-color: v.$blanco;
+        border: 1px solid v.$gris-borde;
+        border-radius: 2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: v.$texto-oscuro;
+        transition: all 0.2s ease;
+        user-select: none;
+
+        &:hover {
+            border-color: v.$primario;
+        }
+    }
+}
+
+// Contenedor principal del cronograma
+.cronograma-componente {
+    margin: 3rem 0;
+}
+
+// Pestañas de Días (Lunes a Sábado)
+.cronograma-tabs-dias {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    padding-bottom: 0.8rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 2px solid color.adjust(v.$gris-borde, $lightness: 35%);
+
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: color.adjust(v.$gris-borde, $lightness: 25%);
+        border-radius: 3px;
+    }
+
+    .tab-dia-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1.2rem 2.2rem;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid transparent;
+        color: v.$gris-claro;
+        font-family: v.$fuente_principal;
+        font-size: 1.6rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        margin-bottom: -2px;
+
+        &__nombre {
+            transition: color 0.2s ease;
+        }
+
+        &__badge {
+            display: inline-block;
+            background-color: color.adjust(v.$gris-borde, $lightness: 35%);
+            color: v.$gris-medio;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        &:hover {
+            color: v.$negro;
+
+            .tab-dia-btn__badge {
+                background-color: color.adjust(v.$gris-borde, $lightness: 25%);
+            }
+        }
+
+        &.activo {
+            color: v.$primario;
+            border-bottom-color: v.$primario;
+
+            .tab-dia-btn__nombre {
+                color: v.$primario;
+            }
+
+            .tab-dia-btn__badge {
+                background-color: v.$primario;
+                color: v.$blanco;
+            }
+        }
+    }
+}
+
+// Filtros por disciplina
+.cronograma-filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+    background-color: v.$blanco;
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+
+    @include m.tablet {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__label {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: v.$gris-medio;
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        i {
+            color: v.$primario;
+        }
+    }
+
+    &__botones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .filtro-btn {
+        padding: 0.7rem 1.6rem;
+        border-radius: 2rem;
+        border: 1px solid v.$gris-borde;
+        background-color: v.$fondo-suave;
+        color: v.$texto-oscuro;
+        font-size: 1.3rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: v.$primario;
+            color: v.$primario;
+        }
+
+        &.activo {
+            background-color: v.$negro;
+            color: v.$blanco;
+            border-color: v.$negro;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+    }
+}
+
+// Paneles de cada día
+.cronograma-paneles {
+    .panel-dia {
+        display: none;
+        animation: fadeIn 0.25s ease forwards;
+
+        &--activo {
+            display: block;
+        }
+
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid color.adjust(v.$gris-borde, $lightness: 35%);
+
+            h3 {
+                margin: 0;
+                font-size: 2.2rem;
+                color: v.$negro;
+            }
+
+            .panel-dia__resumen {
+                font-size: 1.4rem;
+                color: v.$gris-claro;
+                font-weight: 700;
+            }
+        }
+
+        &__vacio {
+            text-align: center;
+            background-color: v.$blanco;
+            padding: 6rem 2rem;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+
+            i {
+                font-size: 4.8rem;
+                color: color.adjust(v.$gris-borde, $lightness: 25%);
+                margin-bottom: 1.5rem;
+            }
+
+            h4 {
+                font-size: 2rem;
+                color: v.$negro;
+                margin-bottom: 0.8rem;
+            }
+
+            p {
+                color: v.$gris-claro;
+                font-size: 1.5rem;
+                margin: 0;
+            }
+        }
+    }
+}
+
+// Grid espacioso de tarjetas de horarios
+.grid-tarjetas-horarios {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @include m.tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include m.desktop {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+// Tarjeta individual espaciosa
+.tarjeta-horario {
+    background-color: v.$blanco;
+    border-radius: 1.2rem;
+    border: 1px solid color.adjust(v.$gris-borde, $lightness: 35%);
+    border-left: 5px solid v.$primario;
+    padding: 2.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    &__hora {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        background-color: color.adjust(v.$primario, $lightness: 42%);
+        color: v.$primario;
+        padding: 0.6rem 1.4rem;
+        border-radius: 2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+
+        i {
+            font-size: 1.4rem;
+        }
+    }
+
+    &__acciones {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        form {
+            margin: 0;
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.4rem;
+            height: 3.4rem;
+            border-radius: 0.8rem;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.2s ease;
+
+            &--editar {
+                background-color: color.adjust(v.$acento-azul, $lightness: 40%);
+                color: v.$acento-azul;
+
+                &:hover {
+                    background-color: v.$acento-azul;
+                    color: v.$blanco;
+                    transform: scale(1.08);
+                }
+            }
+
+            &--eliminar {
+                background-color: color.adjust(v.$rojo-error, $lightness: 36%);
+                color: v.$rojo-error;
+
+                &:hover {
+                    background-color: v.$rojo-error;
+                    color: v.$blanco;
+                    transform: scale(1.08);
+                }
+            }
+        }
+    }
+
+    &__cuerpo {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__titulo {
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin: 0 0 1.5rem 0;
+        color: v.$negro;
+        line-height: 1.2;
+    }
+
+    &__descripcion {
+        color: #64748b;
+        font-size: 1.35rem;
+        margin: -0.6rem 0 1.2rem 0;
+        line-height: 1.4;
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+
+        i {
+            color: v.$primario;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+    }
+
+    &__detalles {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid color.adjust(v.$gris-borde, $lightness: 38%);
+
+        .detalle-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.45rem;
+            color: v.$gris-medio;
+
+            i {
+                font-size: 1.5rem;
+                color: v.$primario;
+                width: 2rem;
+                text-align: center;
+            }
+
+            strong {
+                color: v.$negro;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

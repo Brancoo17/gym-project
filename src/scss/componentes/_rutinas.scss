@@ -1,0 +1,1310 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+// Toolbar y Filtros de Rutinas
+.rutinas-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+
+    &__filtros {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__fecha {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: v.$blanco;
+        padding: 0.6rem 1.4rem;
+        border-radius: 0.8rem;
+        border: 1px solid #e2e8f0;
+        font-size: 1.35rem;
+        color: #334155;
+
+        input[type="date"] {
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 1.35rem;
+            color: #0f172a;
+            cursor: pointer;
+        }
+    }
+}
+
+// Grilla de Rutinas
+.grid-rutinas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(34rem, 1fr));
+    gap: 2.4rem;
+}
+
+.card-rutina {
+    background: v.$blanco;
+    border-radius: 1.4rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+        border-color: #cbd5e1;
+    }
+
+    &__header {
+        padding: 1.8rem 2.2rem;
+        background: #f8fafc;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__plan-badge {
+        font-size: 1.25rem;
+        font-weight: 700;
+        padding: 0.4rem 1.1rem;
+        border-radius: 2rem;
+        background: #ffedd5;
+        color: #c2410c;
+
+        &--crossfit {
+            background: #ffedd5;
+            color: #c2410c;
+        }
+        &--musculacion {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+        &--funcional {
+            background: #dcfce7;
+            color: #15803d;
+        }
+    }
+
+    &__fecha {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__cuerpo {
+        padding: 2.2rem;
+        flex: 1;
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 1rem 0;
+            line-height: 1.3;
+        }
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+
+        &-item {
+            font-size: 1.35rem;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+
+            i {
+                color: #94a3b8;
+                font-size: 1.4rem;
+                width: 1.8rem;
+            }
+
+            strong {
+                color: #0f172a;
+            }
+        }
+    }
+
+    &__badges-resumen {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.6rem;
+    }
+
+    &__tag {
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 0.4rem 0.9rem;
+        border-radius: 0.6rem;
+        background: #f1f5f9;
+        color: #334155;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &--wod {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+    }
+
+    &__footer {
+        padding: 1.4rem 2.2rem;
+        background: #ffffff;
+        border-top: 1px solid #f1f5f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+// Constructor de Rutinas
+.constructor-card {
+    background: v.$blanco;
+    border-radius: 1.4rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    padding: 3.5rem;
+    max-width: 96rem;
+}
+
+.bloque-rutina {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 1.2rem;
+    padding: 2.2rem;
+    margin-bottom: 2.2rem;
+    position: relative;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: #cbd5e1;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        margin-bottom: 1.8rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid #e2e8f0;
+
+        h4 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            i {
+                color: v.$primario;
+            }
+        }
+    }
+
+    &__parametros {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+
+        label {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #475569;
+            margin: 0;
+        }
+
+        input {
+            width: 10rem;
+            padding: 0.6rem 1rem;
+            font-size: 1.35rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.6rem;
+            text-align: center;
+        }
+    }
+
+    &__ejercicios {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+}
+
+.fila-ejercicio-builder {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.8rem;
+    padding: 1.4rem 1.6rem;
+    display: grid;
+    grid-template-columns: 2.2fr 0.9fr 1fr 1.1fr 1.1fr 4rem;
+    gap: 1.2rem;
+    align-items: flex-end;
+
+    &--estandar {
+        grid-template-columns: 2.5fr 1fr 1fr 2fr 4rem;
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+
+        &--estandar {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .campo-ejercicio {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1.35rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.6rem;
+            font-family: inherit;
+            background: #ffffff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+
+            &:focus {
+                border-color: v.$primario;
+                box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+            }
+        }
+    }
+
+    &__btn-eliminar {
+        background: #fee2e2;
+        color: #dc2626;
+        border: none;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 0.6rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        transition: all 0.2s;
+        align-self: flex-end;
+        margin-bottom: 0.1rem;
+
+        &:hover {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+        @media (max-width: 900px) {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+.btn-agregar-ejercicio {
+    margin-top: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: #ffffff;
+    color: #0369a1;
+    border: 1px dashed #0284c7;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: #e0f2fe;
+        border-style: solid;
+    }
+}
+
+// Pestañas de Género dentro del Constructor (Días de Musculación)
+.bloque-rutina__genero-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+
+    .btn-genero-tab {
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        color: #64748b;
+        font-weight: 700;
+        font-size: 1.3rem;
+        padding: 0.7rem 1.4rem;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: all 0.2s;
+
+        i {
+            font-size: 1.4rem;
+        }
+
+        &--hombres.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+        }
+
+        &--mujeres.active {
+            background: #ec4899;
+            color: #ffffff;
+            border-color: #ec4899;
+            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.25);
+        }
+
+        &:not(.active):hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+    }
+
+    .btn-copiar-genero {
+        margin-left: auto;
+        background: #f1f5f9;
+        border: 1px dashed #94a3b8;
+        color: #475569;
+        font-size: 1.25rem;
+        font-weight: 600;
+        padding: 0.6rem 1.2rem;
+        border-radius: 0.6rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+
+        &:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+            border-color: #64748b;
+        }
+    }
+}
+
+.vacio-genero-builder {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 0.8rem;
+    margin-bottom: 1.2rem;
+
+    i {
+        font-size: 2.8rem;
+        color: #cbd5e1;
+        margin-bottom: 0.8rem;
+    }
+
+    p {
+        color: #64748b;
+        font-size: 1.35rem;
+        margin: 0;
+    }
+}
+
+// Pizarra de WOD / Vista Detalle
+.pizarra-wod {
+    background: #0b0f19;
+    color: #f8fafc;
+    border-radius: 1.8rem;
+    padding: 2.2rem 1.6rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    margin-bottom: 4rem;
+
+    @media (min-width: 768px) {
+        padding: 3rem 2.5rem;
+    }
+
+    @media (min-width: 1024px) {
+        padding: 3.5rem;
+    }
+
+    &__header {
+        border-bottom: 2px solid #1e293b;
+        padding-bottom: 2rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.4rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            @media (min-width: 768px) {
+                font-size: 3rem;
+                gap: 1.2rem;
+            }
+
+            i {
+                color: v.$primario;
+            }
+        }
+
+        p {
+            color: #94a3b8;
+            margin: 0.5rem 0 0 0;
+            font-size: 1.4rem;
+
+            @media (min-width: 768px) {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    &__wod-banner {
+        background: linear-gradient(135deg, rgba(122, 255, 34, 0.15), rgba(15, 23, 42, 0.8));
+        border: 2px solid v.$primario;
+        border-radius: 1.4rem;
+        padding: 2rem 2.2rem;
+        margin-bottom: 2.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+
+        &-info {
+            h3 {
+                color: v.$primario;
+                font-size: 2.2rem;
+                margin: 0 0 0.5rem 0;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            p {
+                color: #e2e8f0;
+                font-size: 1.5rem;
+                margin: 0;
+            }
+        }
+
+        &-tiempo {
+            background: v.$primario;
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 800;
+            padding: 0.8rem 1.8rem;
+            border-radius: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    &__seccion {
+        background: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 1.4rem;
+        padding: 1.8rem 1.4rem;
+        margin-bottom: 2.2rem;
+
+        @media (min-width: 768px) {
+            padding: 2.2rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            padding: 2.4rem;
+        }
+
+        &--wod {
+            border: 1px solid rgba(122, 255, 34, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(255, 87, 34, 0.08);
+        }
+
+        &-titulo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin: 0 0 1.6rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 1rem;
+
+            @media (min-width: 768px) {
+                font-size: 1.8rem;
+                margin-bottom: 1.8rem;
+            }
+
+            &--wod {
+                color: v.$primario;
+                border-bottom-color: rgba(122, 255, 34, 0.15);
+            }
+
+            span.badge-rondas {
+                font-size: 1.25rem;
+                background: #0369a1;
+                color: #ffffff;
+                padding: 0.3rem 1rem;
+                border-radius: 2rem;
+            }
+        }
+    }
+
+    &__genero-tabs {
+        display: flex;
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+        background: rgba(15, 23, 42, 0.6);
+        padding: 0.6rem;
+        border-radius: 1.2rem;
+        border: 1px solid #1e293b;
+
+        .btn-pizarra-genero {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 700;
+            font-size: 1.35rem;
+            padding: 0.9rem 1.4rem;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            transition: all 0.25s ease;
+
+            @media (min-width: 768px) {
+                font-size: 1.45rem;
+                padding: 1rem 2rem;
+            }
+
+            i {
+                font-size: 1.5rem;
+            }
+
+            .badge-count {
+                background: rgba(255, 255, 255, 0.12);
+                font-size: 1.15rem;
+                font-weight: 600;
+                padding: 0.2rem 0.7rem;
+                border-radius: 9999px;
+                color: #f1f5f9;
+            }
+
+            &--hombres.active {
+                background: #0284c7;
+                color: #ffffff;
+                box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+
+                .badge-count {
+                    background: rgba(255, 255, 255, 0.25);
+                    color: #ffffff;
+                }
+            }
+
+            &--mujeres.active {
+                background: #ec4899;
+                color: #ffffff;
+                box-shadow: 0 4px 15px rgba(236, 72, 153, 0.35);
+
+                .badge-count {
+                    background: rgba(255, 255, 255, 0.25);
+                    color: #ffffff;
+                }
+            }
+
+            &:not(.active):hover {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.06);
+            }
+        }
+    }
+
+    &__lista-ejercicios {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
+        }
+    }
+
+    &__item-ejercicio {
+        background: #1f2937;
+        border: 1px solid #374151;
+        border-radius: 1.2rem;
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        min-width: 0;
+
+        &-img {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 0.8rem;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1.8rem;
+        }
+    }
+}
+
+// Estilos interactivos para la vista del alumno / cliente
+.item-ejercicio-cliente {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: #4b5563;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    &--completado {
+        background: #0b1324;
+        border-color: rgba(34, 197, 94, 0.4);
+        opacity: 0.75;
+
+        .item-ejercicio-cliente__nombre {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+    }
+
+    &__cabecera {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        min-width: 0;
+        width: 100%;
+    }
+
+    &__titulo-col {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    &__nombre {
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: #f8fafc;
+        line-height: 1.3;
+        margin: 0;
+        word-break: break-word;
+    }
+
+    &__grupo {
+        font-size: 1.2rem;
+        color: #94a3b8;
+        font-weight: 500;
+    }
+
+    &__metricas {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.8rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        width: 100%;
+    }
+}
+
+// Badges de métricas para Series, Reps, Rx y Notas
+.metrica-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 0.6rem;
+    font-size: 1.3rem;
+    line-height: 1.2;
+
+    i {
+        font-size: 1.2rem;
+    }
+
+    &--series {
+        background: rgba(14, 165, 233, 0.15);
+        color: #38bdf8;
+        border: 1px solid rgba(14, 165, 233, 0.25);
+    }
+
+    &--rx {
+        background: rgba(249, 115, 22, 0.15);
+        color: #fb923c;
+        border: 1px solid rgba(249, 115, 22, 0.3);
+        font-weight: 600;
+    }
+
+    &--notas {
+        background: rgba(100, 116, 139, 0.18);
+        color: #cbd5e1;
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        font-style: italic;
+    }
+}
+
+.check-circulo {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    border: 2px solid #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    color: transparent;
+    font-size: 1.3rem;
+
+    &--activo {
+        background: #22c55e;
+        border-color: #22c55e;
+        color: #ffffff;
+        transform: scale(1.08);
+    }
+}
+
+.btn-video-tecnica {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 0.6rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-left: auto;
+    white-space: nowrap;
+
+    &:hover {
+        background: #ef4444;
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+}
+
+.btn-reiniciar-checks {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.8rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.2s;
+
+    &:hover {
+        background: #1e293b;
+        color: #ffffff;
+        border-color: #475569;
+    }
+}
+
+// Componente de Destinatario y Buscador de Alumnos
+.campo-destinatario {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.destinatario-opcion-grupal {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.8rem;
+    padding: 1rem 1.4rem;
+    transition: all 0.2s;
+
+    &:hover {
+        border-color: #cbd5e1;
+        background: #f1f5f9;
+    }
+
+    .checkbox-grupal-label {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        margin: 0;
+        user-select: none;
+
+        input[type="checkbox"] {
+            width: 1.9rem;
+            height: 1.9rem;
+            accent-color: v.$primario;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .checkbox-texto {
+            font-size: 1.35rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            i {
+                color: v.$primario;
+                font-size: 1.4rem;
+            }
+
+            strong {
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.destinatario-badge-grupal {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    padding: 0.9rem 1.2rem;
+    border-radius: 0.8rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+
+    i {
+        color: #10b981;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+    }
+}
+
+.destinatario-buscador-contenedor {
+    position: relative;
+
+    .label-subcampo {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #64748b;
+        margin-bottom: 0.6rem;
+        display: block;
+    }
+}
+
+.destinatario-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    > i {
+        position: absolute;
+        left: 1.4rem;
+        color: #94a3b8;
+        font-size: 1.5rem;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 1.1rem 3.8rem 1.1rem 4.4rem !important;
+        font-size: 1.35rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.8rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        background: #ffffff;
+
+        &:focus {
+            outline: none;
+            border-color: v.$primario;
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+        }
+    }
+
+    .btn-limpiar-busqueda {
+        position: absolute;
+        right: 0.8rem;
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        font-size: 1.4rem;
+        padding: 0.4rem 0.6rem;
+        cursor: pointer;
+        border-radius: 0.4rem;
+        transition: color 0.15s;
+
+        &:hover {
+            color: #ef4444;
+        }
+    }
+}
+
+.dropdown-alumnos {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.8rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    max-height: 24rem;
+    overflow-y: auto;
+    z-index: 50;
+
+    .item-alumno-sugerencia {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        cursor: pointer;
+        transition: background 0.15s;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background: #f8fafc;
+        }
+
+        &__info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+
+            strong {
+                color: #0f172a;
+                font-size: 1.35rem;
+                font-weight: 600;
+            }
+
+            span {
+                color: #64748b;
+                font-size: 1.2rem;
+            }
+        }
+
+        &__badge {
+            font-size: 1.15rem;
+            color: v.$primario;
+            background: rgba(255, 87, 34, 0.08);
+            border: 1px solid rgba(255, 87, 34, 0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 0.4rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.tarjeta-alumno-seleccionado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.8rem;
+    padding: 0.9rem 1.4rem;
+    margin-top: 0.6rem;
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+
+        .avatar {
+            width: 3.6rem;
+            height: 3.6rem;
+            border-radius: 50%;
+            background: #3b82f6;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .datos {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+
+            strong {
+                color: #1e3a8a;
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+
+            span {
+                color: #3b82f6;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .btn-deseleccionar-alumno {
+        background: #fee2e2;
+        color: #dc2626;
+        border: 1px solid #fca5a5;
+        border-radius: 0.6rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.15s;
+
+        &:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+    }
+}
+
+// Selector multi-alumno para rutinas
+.destinatario-buscador-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    .label-subcampo {
+        margin-bottom: 0 !important;
+    }
+}
+
+.badge-contador-alumnos {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0369a1;
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    padding: 0.25rem 0.9rem;
+    border-radius: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.contenedor-alumnos-seleccionados {
+    margin-top: 1.2rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.8rem;
+    padding: 1.2rem 1.4rem;
+}
+
+.alumnos-seleccionados-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #edf2f7;
+
+    .alumnos-seleccionados-titulo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #334155;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        i {
+            color: #0284c7;
+        }
+    }
+
+    .btn-quitar-todos {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 0.4rem;
+        transition: all 0.15s;
+
+        &:hover {
+            color: #ef4444;
+            background: #fee2e2;
+        }
+    }
+}
+
+.lista-chips-alumnos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.chip-alumno {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.7rem;
+    padding: 0.6rem 0.9rem 0.6rem 0.7rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.15s ease;
+
+    &:hover {
+        border-color: #93c5fd;
+        background: #f0f9ff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(2, 132, 199, 0.12);
+    }
+
+    &__avatar {
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 50%;
+        background: #0284c7;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.25;
+    }
+
+    &__nombre {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    &__email {
+        font-size: 1.15rem;
+        color: #64748b;
+    }
+
+    &__btn-quitar {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        font-size: 1.3rem;
+        cursor: pointer;
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+        margin-left: 0.4rem;
+
+        &:hover {
+            color: #dc2626;
+            background: #fee2e2;
+        }
+    }
+}
+
+.item-alumno-sugerencia--seleccionado {
+    background: #f0fdf4 !important;
+
+    .item-alumno-sugerencia__badge {
+        color: #16a34a !important;
+        background: #dcfce7 !important;
+        border-color: #86efac !important;
+    }
+}
+
+// Grilla adaptable del formulario de rutinas:
+// En teléfonos (< 768px): 1 columna (un input/select/checkbox debajo de otro)
+// En tablets y escritorio (>= 768px): 2 columnas
+.rutinas-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include m.tablet {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+

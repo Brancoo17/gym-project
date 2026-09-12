@@ -1,0 +1,25 @@
+# Protección global contra navegación de directorios
+Options -Indexes
+
+# Bloquear acceso a archivos sensibles y de configuración
+<FilesMatch "^(\.env|\.git|\.gitignore|composer\.(json|lock)|package(-lock)?\.json|gulpfile\.js|CONTEXT\.md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Deny,Allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Bloquear acceso directo a carpetas internas sensibles si el DocumentRoot no apunta a public/
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si la petición es para sql, includes, models, controllers, views, classes, scripts o vendor, denegar
+    RewriteRule ^(sql|includes|models|controllers|views|classes|scripts|vendor)/ - [F,L]
+
+    # Redirigir la raíz hacia public/ en caso de que el DocumentRoot apunte a la carpeta raíz
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

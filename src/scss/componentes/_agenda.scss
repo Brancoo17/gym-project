@@ -1,0 +1,869 @@
+@use 'sass:color';
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+// Navegación de Fechas de la Agenda
+.agenda-nav-card {
+    background: v.$blanco;
+    padding: 2rem 2.5rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    margin-bottom: 2.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.agenda-nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+}
+
+.agenda-fecha-display {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    i {
+        color: v.$primario;
+        font-size: 2.4rem;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 2rem;
+        color: v.$negro;
+        font-weight: 800;
+    }
+
+    span {
+        color: #64748b;
+        font-size: 1.35rem;
+
+        strong {
+            color: #1e293b;
+        }
+    }
+}
+
+.badge-hoy {
+    background: v.$primario;
+    color: v.$blanco !important;
+    font-size: 1.15rem;
+    font-weight: 800;
+    padding: 0.3rem 0.9rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+        font-size: 0.8rem;
+        color: v.$blanco;
+    }
+}
+
+.agenda-nav-controles {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-nav-dia {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.4rem;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    border-radius: 0.8rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #e2e8f0;
+        border-color: #94a3b8;
+        color: v.$negro;
+    }
+}
+
+.btn-nav-hoy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.4rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+    border-radius: 0.8rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #dbeafe;
+    }
+}
+
+.input-fecha-wrapper {
+    input[type="date"] {
+        padding: 0.85rem 1.2rem;
+        font-family: inherit;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1e293b;
+        background: v.$blanco;
+        border: 2px solid #cbd5e1;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &:hover,
+        &:focus {
+            border-color: v.$primario;
+        }
+    }
+}
+
+// Métricas de la Agenda
+.agenda-metricas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 1.8rem;
+    margin-bottom: 2.5rem;
+}
+
+.metrica-card {
+    background: v.$blanco;
+    border-radius: 1.2rem;
+    padding: 1.8rem 2.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &__icono {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        flex-shrink: 0;
+
+        &--naranja {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        &--azul {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        &--verde {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        &--rojo {
+            background: rgba(239, 68, 68, 0.12);
+            color: v.$rojo-error;
+        }
+
+        &--celeste {
+            background: rgba(14, 165, 233, 0.12);
+            color: v.$acento-azul;
+        }
+
+        &--amarillo {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        &--morado {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        &--gris {
+            background: #f8fafc;
+            color: #64748b;
+        }
+    }
+
+    &--borde-verde {
+        border-left: 4px solid v.$primario;
+    }
+
+    &--borde-azul {
+        border-left: 4px solid v.$acento-azul;
+    }
+
+    &--borde-rojo {
+        border-left: 4px solid v.$rojo-error;
+    }
+
+    &--borde-amarillo {
+        border-left: 4px solid v.$amarillo-aviso;
+    }
+
+    &--borde-morado {
+        border-left: 4px solid #8b5cf6;
+    }
+
+    &--borde-naranja {
+        border-left: 4px solid v.$secundario;
+    }
+
+    &__label {
+        display: block;
+        font-size: 1.3rem;
+        color: #64748b;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+    }
+
+    &__valor {
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: v.$negro;
+        line-height: 1.1;
+
+        &--verde {
+            color: v.$primario;
+        }
+
+        &--rojo {
+            color: v.$rojo-error;
+        }
+
+        &--amarillo {
+            color: #d97706;
+        }
+
+        &--morado {
+            color: #7c3aed;
+        }
+
+        .metrica-card__subvalor {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #64748b;
+
+            &--verde {
+                color: v.$primario;
+            }
+        }
+    }
+}
+
+// Buscador de agenda
+.agenda-buscador {
+    margin-bottom: 2.5rem;
+
+    &__input-wrapper {
+        position: relative;
+        max-width: 45rem;
+
+        i {
+            position: absolute;
+            left: 1.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 1.1rem 1.4rem 1.1rem 4rem;
+            font-family: inherit;
+            font-size: 1.45rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.8rem;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:focus {
+                border-color: v.$primario;
+            }
+        }
+    }
+}
+
+// Tarjeta de Clase en la Agenda
+.clase-agenda-card {
+    background: v.$blanco;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+    border-left: 6px solid v.$primario;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    }
+}
+
+.clase-agenda-header {
+    padding: 2rem 2.5rem;
+    background: #fafafa;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.clase-agenda-info {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+}
+
+.clase-agenda-hora {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: v.$negro;
+    color: v.$blanco;
+    font-size: 1.35rem;
+    font-weight: 800;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.7rem;
+    letter-spacing: 0.5px;
+}
+
+.clase-agenda-titulo {
+    font-size: 2.2rem;
+    color: v.$negro;
+    font-weight: 800;
+    margin: 0;
+}
+
+.clase-agenda-profesor {
+    font-size: 1.4rem;
+    color: #475569;
+    font-weight: 600;
+    background: v.$blanco;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.6rem;
+    border: 1px solid #e2e8f0;
+
+    i {
+        color: v.$primario;
+    }
+}
+
+.clase-agenda-stats {
+    min-width: 20rem;
+}
+
+.clase-agenda-inscriptos-text {
+    font-size: 1.45rem;
+    color: #64748b;
+    font-weight: 700;
+
+    strong {
+        font-size: 1.8rem;
+        color: v.$negro;
+    }
+}
+
+.badge-status {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    &--llena {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+    &--vacia {
+        background: #f1f5f9;
+        color: #64748b;
+    }
+
+    &--disponible {
+        background: #ffedd5;
+        color: #c2410c;
+    }
+}
+
+.progreso-cupos-bar {
+    width: 100%;
+    height: 0.8rem;
+    background: #e2e8f0;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: 0.8rem;
+}
+
+.progreso-cupos-fill {
+    height: 100%;
+    background: v.$primario;
+    border-radius: 1rem;
+    transition: width 0.4s ease;
+
+    &--full {
+        background: #ef4444;
+    }
+}
+
+// Botón Desplegable Ver Alumnos
+.btn-toggle-alumnos {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.85rem 1.5rem;
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.8rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #e2e8f0;
+        border-color: #94a3b8;
+        color: v.$negro;
+        cursor: pointer;
+    }
+
+    &.activo {
+        background: v.$negro;
+        color: v.$blanco;
+        border-color: v.$negro;
+    }
+
+    .flecha-toggle {
+        font-size: 1.2rem;
+        transition: transform 0.25s ease;
+    }
+}
+
+.clases-contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.clase-agenda-acciones-top {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.clase-agenda-stats__conteo {
+    text-align: right;
+}
+
+.contador-presentes-clase {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: v.$primario;
+    margin-left: 0.8rem;
+}
+
+.clase-vacia-mensaje {
+    text-align: center;
+    padding: 3rem;
+    background: #f8fafc;
+    border-radius: 0.8rem;
+    color: #64748b;
+
+    i {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+        color: #94a3b8;
+        display: block;
+    }
+}
+
+.tag-modalidad {
+    font-size: 1.3rem;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 0.4rem 1rem;
+    border-radius: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+        color: v.$acento-azul;
+    }
+}
+
+.alumno-fila-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.alumno-nombre {
+    color: v.$negro;
+    font-size: 1.5rem;
+    display: block;
+}
+
+.alumno-email {
+    color: #475569;
+    font-size: 1.35rem;
+
+    i {
+        color: #94a3b8;
+        margin-right: 0.4rem;
+    }
+}
+
+.alumno-sin-tel {
+    color: #94a3b8;
+    font-size: 1.3rem;
+}
+
+.btn-volver-hoy {
+    display: inline-block;
+    padding: 1rem 2rem;
+}
+
+.btn-volver-panel {
+    padding: 1rem 1.8rem;
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.tabla-contenedor--sin-margen {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0.8rem;
+    border: 1px solid #f1f5f9;
+}
+
+.tabla--sin-margen {
+    margin: 0;
+}
+
+.tabla__th--indice,
+.tabla__td--indice {
+    width: 5rem;
+    text-align: center;
+    color: #94a3b8;
+    font-weight: 700;
+}
+
+.tabla__th--presentismo {
+    text-align: center;
+    min-width: 20rem;
+}
+
+// Cuerpo de la clase
+.clase-agenda-body {
+    padding: 2rem 2.5rem;
+}
+
+.avatar-alumno {
+    width: 3.6rem;
+    height: 3.6rem;
+    background: v.$primario;
+    color: v.$blanco;
+    font-weight: 800;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.badge-asistencia {
+    background: #d1fae5;
+    color: #047857;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #059669;
+    font-weight: 700;
+    font-size: 1.35rem;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.6rem;
+    background: #ecfdf5;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: #d1fae5;
+        color: #047857;
+    }
+}
+
+// Botón Cancelar Reserva (Admin)
+.btn-cancelar-admin {
+    background-color: #ef4444;
+    color: v.$blanco;
+    border: none;
+    border-radius: 0.6rem;
+    width: 3.4rem;
+    height: 3.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(239, 68, 68, 0.25);
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: #dc2626;
+        color: v.$blanco;
+        cursor: pointer;
+        transform: scale(1.08);
+        box-shadow: 0 4px 10px rgba(220, 38, 38, 0.35);
+    }
+}
+
+.agenda-vacia-card {
+    background: v.$blanco;
+    padding: 6rem 2rem;
+    text-align: center;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+
+    i {
+        font-size: 4.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        margin: 0 0 0.8rem 0;
+        color: v.$negro;
+        font-size: 2rem;
+    }
+
+    p {
+        color: #64748b;
+        margin: 0 0 2rem 0;
+        font-size: 1.5rem;
+    }
+}
+
+// Control interactivo de Asistencia / Presentismo
+.control-asistencia {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 0.3rem;
+    border-radius: 0.8rem;
+    border: 1px solid #e2e8f0;
+    gap: 0.3rem;
+}
+
+.btn-asistencia-item {
+    border: none;
+    background: transparent;
+    padding: 0.5rem 1.1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    color: #64748b;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+        color: v.$negro;
+        background: rgba(255, 255, 255, 0.7);
+    }
+
+    &--presente.activo {
+        background: v.$primario;
+        color: v.$blanco;
+        box-shadow: 0 2px 8px rgba(20, 155, 43, 0.35);
+    }
+
+    &--ausente.activo {
+        background: #ef4444;
+        color: v.$blanco;
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+@media (max-width: 768px) {
+    .clase-agenda-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .clase-agenda-stats {
+        width: 100%;
+        text-align: left !important;
+    }
+    .clase-agenda-stats > div {
+        text-align: left !important;
+    }
+    .agenda-nav-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .agenda-nav-controles {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+// Clases de utilidad y layout para Agenda
+.agenda-header-principal {
+    margin-bottom: 2.5rem;
+}
+
+.agenda-fecha-display__titulo-grupo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.metrica-card__icono--celeste {
+    background: rgba(14, 165, 233, 0.12);
+    color: #0ea5e9;
+}
+
+.contenedor-clases-agenda {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.clase-agenda-descripcion {
+    font-size: 1.3rem;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 0.4rem 1rem;
+    border-radius: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+        color: #0ea5e9;
+    }
+}
+
+.clase-agenda-acciones-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.clase-agenda-status-wrapper {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+
+.tabla-contenedor--agenda {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0.8rem;
+    border: 1px solid #f1f5f9;
+}
+
+.tabla--sin-margen {
+    margin: 0;
+}
+
+.col-centrada-sm {
+    text-align: center;
+    width: 5rem;
+    color: #94a3b8;
+    font-weight: 700;
+}
+
+.col-asistencia-head {
+    text-align: center;
+    min-width: 19rem;
+}
+
+.col-accion-head {
+    text-align: center;
+    width: 8rem;
+}
+
+.celda-alumno-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.celda-alumno-nombre {
+    color: #0b0f19;
+    font-size: 1.45rem;
+    display: block;
+}
+
+.celda-alumno-email {
+    color: #475569;
+    font-size: 1.35rem;
+
+    i {
+        color: #94a3b8;
+        margin-right: 0.4rem;
+    }
+}
+
+.celda-sin-dato {
+    color: #94a3b8;
+    font-size: 1.3rem;
+}
+
+.agenda-vacia-card--cerrado i {
+    color: #ef4444;
+}
+
+.agenda-vacia-card--sin-clases i {
+    color: #94a3b8;
+}

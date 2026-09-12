@@ -1,0 +1,123 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.formulario {
+    margin-top: 2rem;
+
+    .campo {
+        margin-bottom: 2rem;
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: v.$negro;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        input[type="file"],
+        input[type="url"],
+        select,
+        textarea {
+
+            width: 100%;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid v.$gris-borde;
+            border-radius: 0.6rem;
+            font-family: v.$fuente_principal;
+            font-size: 1.5rem;
+            background-color: v.$blanco;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: v.$primario;
+                box-shadow: 0 0 0 3px rgba(v.$primario, 0.15);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+        }
+    }
+
+    input[type="submit"] {
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+}
+
+.acciones {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: center;
+
+    @include m.telefono {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    a {
+        color: v.$gris-medio;
+        font-size: 1.4rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: v.$primario;
+        }
+    }
+}
+
+// Contenedor y botón interactivo para mostrar / ocultar contraseña
+.password-toggle-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    input {
+        width: 100%;
+        padding-right: 4.2rem !important;
+    }
+
+    .btn-password-toggle {
+        position: absolute;
+        right: 1.2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        padding: 0.5rem 0.6rem;
+        cursor: pointer;
+        color: #94a3b8;
+        font-size: 1.6rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.15s ease, transform 0.15s ease;
+        z-index: 2;
+
+        &:hover {
+            color: v.$primario;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        &.active {
+            color: v.$primario;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
