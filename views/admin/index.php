@@ -136,6 +136,14 @@ $kpis = $kpis ?? [
         <p>Alta de alumnos en mostrador, activación de cuentas, estado de membresías y seguimiento.</p>
     </a>
 
+    <a class="card-panel" href="/admin/pagos">
+        <div class="card-panel__header">
+            <h3>Pagos y Facturación</h3>
+            <i class="fa-solid fa-credit-card icono--verde"></i>
+        </div>
+        <p>Control de ingresos, cobros en mostrador, pagos por Mercado Pago y proyección de vencimientos.</p>
+    </a>
+
     <a class="card-panel" href="/admin/configuracion">
         <div class="card-panel__header">
             <h3>Configuración del Sitio</h3>

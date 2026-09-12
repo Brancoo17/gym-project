@@ -133,6 +133,10 @@
                             <i class="fa-solid fa-address-book"></i>
                             <span>Gestión de Clientes</span>
                         </a>
+                        <a href="/admin/pagos" class="<?php echo $esActivo('/admin/pagos'); ?>" title="Pagos y Facturación">
+                            <i class="fa-solid fa-credit-card"></i>
+                            <span>Pagos y Facturación</span>
+                        </a>
                         <a href="/admin/configuracion" class="<?php echo $esActivo('/admin/configuracion'); ?>" title="Configuración">
                             <i class="fa-solid fa-gears"></i>
                             <span>Configuración</span>

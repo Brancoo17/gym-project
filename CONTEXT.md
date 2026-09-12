@@ -44,10 +44,10 @@ Sistema integral de gestión de gimnasio desarrollado en **PHP con arquitectura 
 
 | Entidad                 | Tabla                 | Propósito y Relaciones Clave                                                                                               |
 | :---------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| **Usuarios**            | `usuarios`            | Cuentas del sistema con roles (`cliente`, `admin`, `entrenador`), credenciales, token y confirmación.                      |
+| **Usuarios**            | `usuarios`            | Cuentas del sistema con DNI, roles (`cliente`, `admin`, `entrenador`), credenciales, token y confirmación.               |
 | **Planes**              | `planes`              | Catálogo de disciplinas/planes (precio, duración en días, cupo opcional, imagen, activo).                                  |
 | **Membresías**          | `membresias`          | Suscripciones de clientes a planes con estados (`pendiente`, `activa`, `vencida`, `cancelada`) y vigencia.                 |
-| **Pagos**               | `pagos`               | Registro de transacciones monetarias y sincronización con Mercado Pago (`mp_preference_id`, `mp_payment_id`, `mp_status`). |
+| **Pagos**               | `pagos`               | Registro de transacciones monetarias (Mercado Pago y efectivo en mostrador), estados, método de pago (`mercadopago`, `efectivo`), fecha de pago y sincronización con MP (`mp_preference_id`, `mp_payment_id`, `mp_status`). |
 | **Entrenador-Clientes** | `entrenador_clientes` | Asignación directa y seguimiento de alumnos por entrenador.                                                                |
 | **Horarios**            | `horarios`            | Grilla de turnos semanales por plan, entrenador, día de semana (0-6), horas y cupo.                                        |
 | **Reservas**            | `reservas`            | Turnos reservados por alumnos en horarios específicos con estados (`reservada`, `cancelada`).                              |
@@ -223,7 +223,38 @@ En respuesta a la auditoría de seguridad para operar con pagos reales en produc
 
 ---
 
-## 9. Cómo me gusta trabajar
+## 9. Módulo de Pagos y Facturación (Panel Admin)
+
+Módulo integral de control financiero en `/admin/pagos` que proporciona visibilidad completa sobre ingresos, cobranzas y proyecciones de vencimientos:
+
+- **Ajuste de Esquema (`pagos`)**:
+  - `metodo_pago ENUM('mercadopago', 'efectivo') NOT NULL DEFAULT 'mercadopago'`
+  - `fecha_pago DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP`
+  - Backfill histórico ejecutado en local y producción sincronizando `fecha_pago` con `membresias.fecha_inicio`.
+- **Registro Automático de Cobros**:
+  - `PagoController::webhook()` y `PagoController::procesarExito()`: asignan `metodo_pago = 'mercadopago'` y `fecha_pago = NOW()`.
+  - `UsuarioController::membresiaManual()`: asigna `metodo_pago = 'efectivo'` y `fecha_pago = NOW()`.
+- **Modelo y Analítica (`models/Pago.php`)**:
+  - Filtros de período flexibles (`mes_actual`, `mes_anterior`, `ultimos_30`, `anio_actual`, `historico`).
+  - `obtenerKpisPorPeriodo()`: Total facturado, total aprobados con ticket promedio, pagos pendientes, pagos rechazados y desglose comparativo Mercado Pago vs Efectivo con porcentajes relativos.
+  - `obtenerRecaudacionPorPlan()`: Total facturado y cantidad de transacciones agrupadas por plan/disciplina.
+  - `obtenerProximosVencimientos()`: Detección preventiva de membresías a vencer en los próximos 7 días con DNI, teléfono y plan del alumno.
+  - `obtenerPagosPorPeriodo()`: Listado transaccional enriquecido con datos del alumno (nombre, apellido, DNI, teléfono), plan y estado.
+- **Controlador y Ruta**:
+  - Ruta `GET /admin/pagos` despachada por `AdminController::pagos()` con verificación estricta de rol administrador (`isAdmin()`).
+- **Vista y Experiencia de Usuario (`views/admin/pagos/index.php`)**:
+  - Siguiendo el lenguaje visual de `views/admin/reportes.php`: tarjetas KPI con bordes semánticos, selectores de período por tabs y badge de fecha activa.
+  - Comparativa de métodos de pago con barras de progreso estilizadas y desglose monetario.
+  - Tabla de alertas de vencimientos próximos (<= 7 días) con botón de contacto directo por WhatsApp con mensaje prearmado y acceso a renovación manual en mostrador.
+  - Tabla de transacciones con DNI, método con badge (`Mercado Pago` vs `Efectivo`), estado coloreado y referencia de comprobante.
+  - Botón optimizado para imprimir reporte en limpio (`window.print()`).
+- **Navegación**:
+  - Tarjeta en dashboard principal (`views/admin/index.php`) ubicada inmediatamente después de "Gestión de Clientes".
+  - Enlace directo en el sidebar de administración (`views/layout.php`) ubicado inmediatamente después de "Gestión de Clientes".
+
+---
+
+## 10. Cómo me gusta trabajar
 
 - **Paso a paso**: Avance modular en cambios pequeños y concretos, evitando bloques gigantescos o etapas completas de una sola vez.
 - **Resumen tras cada paso**: Indicar con claridad qué archivos se crearon o modificaron y dar instrucciones precisas de cómo probarlo en el navegador.
