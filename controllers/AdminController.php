@@ -8,6 +8,7 @@ use Model\Horario;
 use Model\Plan;
 use Model\Usuario;
 use Model\ActiveRecord;
+use Model\Pago;
 
 class AdminController {
 
@@ -360,6 +361,29 @@ class AdminController {
             'rankingAlumnos' => $rankingAlumnos,
             'diasMap' => $diasMap,
             'topHorarios' => $topHorarios,
+            'tipo' => 'dashboard'
+        ]);
+    }
+
+    public static function pagos(Router $router): void {
+        isAdmin();
+
+        $periodo = filter_var($_GET['periodo'] ?? 'mes_actual', FILTER_SANITIZE_SPECIAL_CHARS);
+        $filtro = Pago::obtenerFiltroPeriodo($periodo);
+
+        $kpis = Pago::obtenerKpisPorPeriodo($filtro['where']);
+        $pagos = Pago::obtenerPagosPorPeriodo($filtro['where']);
+        $porPlan = Pago::obtenerRecaudacionPorPlan($filtro['where']);
+        $proximosVencimientos = Pago::obtenerProximosVencimientos(7);
+
+        $router->render('admin/pagos/index', [
+            'nombre' => $_SESSION['nombre'] ?? '',
+            'periodo' => $filtro['periodo'],
+            'tituloPeriodo' => $filtro['titulo'],
+            'kpis' => $kpis,
+            'pagos' => $pagos,
+            'porPlan' => $porPlan,
+            'proximosVencimientos' => $proximosVencimientos,
             'tipo' => 'dashboard'
         ]);
     }

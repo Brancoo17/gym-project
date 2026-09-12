@@ -42,6 +42,7 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 $router->get('/admin', [AdminController::class, 'index']);
 $router->get('/admin/reservas', [AdminController::class, 'reservas']);
 $router->get('/admin/reportes', [AdminController::class, 'reportes']);
+$router->get('/admin/pagos', [AdminController::class, 'pagos']);
 // Gestión de Clientes / Alumnos (admin)
 $router->get('/admin/usuarios', [UsuarioController::class, 'index']);
 $router->get('/admin/clientes', [UsuarioController::class, 'index']);
