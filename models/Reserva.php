@@ -70,9 +70,10 @@ class Reserva extends ActiveRecord {
             return null;
         }
 
+        $fechaSegura = self::$db->escape_string($fecha);
         $query = "SELECT COUNT(*) as total FROM " . static::$tabla . " 
                   WHERE horario_id = {$horarioId} 
-                  AND fecha = '{$fecha}' 
+                  AND fecha = '{$fechaSegura}' 
                   AND estado = 'reservada'";
         $resultado = self::$db->query($query);
         $fila = $resultado->fetch_assoc();
@@ -85,10 +86,11 @@ class Reserva extends ActiveRecord {
      * Comprueba si el usuario ya tiene una reserva activa para ese horario y fecha
      */
     public static function existeReservaUsuario(int $usuarioId, int $horarioId, string $fecha): ?self {
+        $fechaSegura = self::$db->escape_string($fecha);
         $query = "SELECT * FROM " . static::$tabla . " 
                   WHERE usuario_id = {$usuarioId} 
                   AND horario_id = {$horarioId} 
-                  AND fecha = '{$fecha}' 
+                  AND fecha = '{$fechaSegura}' 
                   AND estado = 'reservada' 
                   LIMIT 1";
         $resultado = self::consultarSQL($query);

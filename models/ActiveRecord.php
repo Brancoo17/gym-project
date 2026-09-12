@@ -139,13 +139,17 @@ class ActiveRecord {
     }
 
     public static function where(string $columna, mixed $valor) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE {$columna} = '{$valor}'";
+        $columnaSegura = preg_replace('/[^a-zA-Z0-9_]/', '', $columna);
+        $valorSeguro = self::$db->escape_string((string)$valor);
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE `{$columnaSegura}` = '{$valorSeguro}'";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
 
     public static function whereAll(string $columna, mixed $valor) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE {$columna} = '{$valor}'";
+        $columnaSegura = preg_replace('/[^a-zA-Z0-9_]/', '', $columna);
+        $valorSeguro = self::$db->escape_string((string)$valor);
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE `{$columnaSegura}` = '{$valorSeguro}'";
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
