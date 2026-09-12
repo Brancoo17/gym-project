@@ -117,38 +117,3 @@ function obtenerConfiguracion(): \Model\Configuracion {
     return $config;
 }
 
-/**
- * Retorna el token CSRF actual de la sesión o genera uno nuevo
- */
-function csrfToken(): string {
-    if(session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    if(empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-    return $_SESSION['csrf_token'];
-}
-
-/**
- * Retorna el campo HTML input oculto para CSRF
- */
-function csrfCampo(): string {
-    return '<input type="hidden" name="_token" value="' . s(csrfToken()) . '">';
-}
-
-/**
- * Valida que el token CSRF recibido por POST coincida con el de la sesión
- */
-function csrfValido(): bool {
-    if(session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    $tokenRecibido = $_POST['_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
-    $tokenSesion = $_SESSION['csrf_token'] ?? '';
-    if(empty($tokenRecibido) || empty($tokenSesion)) {
-        return false;
-    }
-    return hash_equals($tokenSesion, $tokenRecibido);
-}
-

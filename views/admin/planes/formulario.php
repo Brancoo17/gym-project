@@ -2,7 +2,6 @@
 /** @var \Model\Plan $plan */
 ?>
 
-<?php echo csrfCampo(); ?>
 <div class="campo">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="plan[nombre]" placeholder="Nombre del plan" value="<?php echo s($plan->nombre); ?>">

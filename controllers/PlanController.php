@@ -32,18 +32,6 @@ class PlanController {
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if(!csrfValido()) {
-                Plan::setAlerta('error', 'Token de seguridad no válido o expirado. Por favor recargá la página.');
-                $alertas = Plan::getAlertas();
-                $router->render('admin/planes/crear', [
-                    'plan' => $plan,
-                    'alertas' => $alertas,
-                    'nombre' => $_SESSION['nombre'] ?? '',
-                    'tipo' => 'dashboard'
-                ]);
-                return;
-            }
-
             $plan->sincronizar($_POST['plan'] ?? []);
             $plan->activo = isset($_POST['plan']['activo']) ? 1 : 0;
             $plan->cantidad_clases = !empty($_POST['plan']['cantidad_clases']) ? (int)$_POST['plan']['cantidad_clases'] : null;
@@ -114,18 +102,6 @@ class PlanController {
         $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if(!csrfValido()) {
-                Plan::setAlerta('error', 'Token de seguridad no válido o expirado. Por favor recargá la página.');
-                $alertas = Plan::getAlertas();
-                $router->render('admin/planes/actualizar', [
-                    'plan' => $plan,
-                    'alertas' => $alertas,
-                    'nombre' => $_SESSION['nombre'] ?? '',
-                    'tipo' => 'dashboard'
-                ]);
-                return;
-            }
-
             $plan->sincronizar($_POST['plan'] ?? []);
             $plan->activo = isset($_POST['plan']['activo']) ? 1 : 0;
             $plan->cantidad_clases = !empty($_POST['plan']['cantidad_clases']) ? (int)$_POST['plan']['cantidad_clases'] : null;
@@ -180,11 +156,6 @@ class PlanController {
         isAdmin();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if(!csrfValido()) {
-                header('Location: /admin/planes?error=csrf');
-                return;
-            }
-
             $id = filter_var($_POST['id'] ?? null, FILTER_VALIDATE_INT);
 
             if($id) {
