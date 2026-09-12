@@ -72,6 +72,23 @@ $kpis = $kpis ?? [
 <h2 class="dashboard-seccion-titulo">Módulos del Sistema</h2>
 
 <div class="cards-panel">
+
+    <a class="card-panel" href="/admin/usuarios">
+        <div class="card-panel__header">
+            <h3>Gestión de Clientes</h3>
+            <i class="fa-solid fa-address-book icono--azul"></i>
+        </div>
+        <p>Alta de alumnos en mostrador, activación de cuentas, estado de membresías y seguimiento.</p>
+    </a>
+
+    <a class="card-panel" href="/admin/pagos">
+        <div class="card-panel__header">
+            <h3>Pagos y Facturación</h3>
+            <i class="fa-solid fa-credit-card icono--naranja"></i>
+        </div>
+        <p>Control de ingresos, cobros en mostrador, pagos por Mercado Pago y proyección de vencimientos.</p>
+    </a>
+
     <a class="card-panel" href="/admin/reservas">
         <div class="card-panel__header">
             <h3>Agenda y Asistencia</h3>
@@ -126,22 +143,6 @@ $kpis = $kpis ?? [
             <i class="fa-solid fa-heart-pulse icono--verde"></i>
         </div>
         <p>Catálogo de ejercicios, grupos musculares, técnica y videos.</p>
-    </a>
-
-    <a class="card-panel" href="/admin/usuarios">
-        <div class="card-panel__header">
-            <h3>Gestión de Clientes</h3>
-            <i class="fa-solid fa-address-book icono--azul"></i>
-        </div>
-        <p>Alta de alumnos en mostrador, activación de cuentas, estado de membresías y seguimiento.</p>
-    </a>
-
-    <a class="card-panel" href="/admin/pagos">
-        <div class="card-panel__header">
-            <h3>Pagos y Facturación</h3>
-            <i class="fa-solid fa-credit-card icono--naranja"></i>
-        </div>
-        <p>Control de ingresos, cobros en mostrador, pagos por Mercado Pago y proyección de vencimientos.</p>
     </a>
 
     <a class="card-panel" href="/admin/configuracion">

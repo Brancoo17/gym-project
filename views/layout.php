@@ -94,6 +94,16 @@
                             <i class="fa-solid fa-gauge-high"></i>
                             <span>Inicio</span>
                         </a>
+
+                        <a href="/admin/usuarios" class="<?php echo $esActivo('/admin/usuarios'); ?>" title="Gestión de Clientes">
+                            <i class="fa-solid fa-address-book"></i>
+                            <span>Gestión de Clientes</span>
+                        </a>
+                        <a href="/admin/pagos" class="<?php echo $esActivo('/admin/pagos'); ?>" title="Pagos y Facturación">
+                            <i class="fa-solid fa-credit-card"></i>
+                            <span>Pagos y Facturación</span>
+                        </a>
+
                         <?php if($tieneTurnos): ?>
                             <a href="/admin/reservas" class="<?php echo $esActivo('/admin/reservas'); ?>" title="Agenda y Asistencia">
                                 <i class="fa-solid fa-clipboard-user"></i>
@@ -128,14 +138,6 @@
                         <a href="/admin/ejercicios" class="<?php echo $esActivo('/admin/ejercicios'); ?>" title="Banco de Ejercicios">
                             <i class="fa-solid fa-heart-pulse"></i>
                             <span>Banco de Ejercicios</span>
-                        </a>
-                        <a href="/admin/usuarios" class="<?php echo $esActivo('/admin/usuarios'); ?>" title="Gestión de Clientes">
-                            <i class="fa-solid fa-address-book"></i>
-                            <span>Gestión de Clientes</span>
-                        </a>
-                        <a href="/admin/pagos" class="<?php echo $esActivo('/admin/pagos'); ?>" title="Pagos y Facturación">
-                            <i class="fa-solid fa-credit-card"></i>
-                            <span>Pagos y Facturación</span>
                         </a>
                         <a href="/admin/configuracion" class="<?php echo $esActivo('/admin/configuracion'); ?>" title="Configuración">
                             <i class="fa-solid fa-gears"></i>
