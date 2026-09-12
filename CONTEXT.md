@@ -188,9 +188,45 @@ Sistema integral de gestión de gimnasio desarrollado en **PHP con arquitectura 
 
 ---
 
-## 7. Cómo me gusta trabajar
+## 8. Remediación de Seguridad (Auditoría Post-Producción)
+
+En respuesta a la auditoría de seguridad para operar con pagos reales en producción, se implementaron las siguientes mejoras críticas:
+
+1. **Credenciales y Secretos (Prioridad 1)**:
+   - Eliminación del archivo `gym-deploy.zip` del working tree y purgado definitivo de todos los commits históricos del repositorio Git mediante `git-filter-repo`.
+   - Inclusión de `*.zip` y `.env.*` en `.gitignore`. Verificación de `.env.example` con valores placeholder exclusivamente.
+2. **Inyección SQL (Prioridad 2)**:
+   - Sanitización de columnas con whitelist alfanumérica y escapado de valores con `self::$db->escape_string()` en `ActiveRecord::where()` y `ActiveRecord::whereAll()`.
+   - Escapado estricto de variables en consultas directas: `Usuario::existeUsuario()`, `Reserva::cuposDisponibles()` y `Reserva::existeReservaUsuario()`.
+3. **Tokens Criptográficos (Prioridad 3)**:
+   - Reemplazo de `uniqid()` por `bin2hex(random_bytes(32))` (64 caracteres con 256 bits de entropía CSPRNG) en `Usuario::crearToken()` para confirmación y recuperación de contraseñas.
+   - Actualización del esquema de base de datos a `token VARCHAR(64)` en los archivos SQL.
+4. **Protección CSRF (Prioridad 4)**:
+   - Pospuesta a pedido del desarrollador para una etapa posterior.
+5. **Endurecimiento de Sesión (Prioridad 5)**:
+   - Regeneración de ID de sesión (`session_regenerate_id(true)`) tras login exitoso en `LoginController::login()` contra ataques de *Session Fixation*.
+   - Configuración de directivas de cookie en `Router.php` previo a `session_start()`: `httponly = true`, `samesite = 'Lax'` (garantizando compatibilidad con los retornos de Mercado Pago Checkout) y `secure` dinámico en entornos HTTPS.
+   - Limpieza completa de sesión en `LoginController::logout()`: vaciado de `$_SESSION`, invalidación y borrado de la cookie de sesión del navegador y ejecución de `session_destroy()`.
+
+### Acciones Pendientes del Desarrollador
+1. **Base de Datos (InfinityFree / phpMyAdmin)**:
+   Ejecutar la siguiente sentencia SQL:
+   ```sql
+   ALTER TABLE usuarios MODIFY COLUMN token VARCHAR(64) DEFAULT NULL;
+   ```
+2. **Subida de Archivos a Producción (`filemanager.ai`)**:
+   - `models/ActiveRecord.php`
+   - `models/Usuario.php`
+   - `models/Reserva.php`
+   - `Router.php`
+   - `controllers/LoginController.php`
+
+---
+
+## 9. Cómo me gusta trabajar
 
 - **Paso a paso**: Avance modular en cambios pequeños y concretos, evitando bloques gigantescos o etapas completas de una sola vez.
 - **Resumen tras cada paso**: Indicar con claridad qué archivos se crearon o modificaron y dar instrucciones precisas de cómo probarlo en el navegador.
 - **Confirmación explícita**: Esperar el visto bueno del desarrollador antes de continuar con el siguiente paso o etapa.
 - **Alineación previa**: Ante cualquier duda arquitectónica, de convención o regla de negocio, consultar siempre antes de asumir.
+
