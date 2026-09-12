@@ -139,7 +139,7 @@ $kpis = $kpis ?? [
     <a class="card-panel" href="/admin/pagos">
         <div class="card-panel__header">
             <h3>Pagos y Facturación</h3>
-            <i class="fa-solid fa-credit-card icono--verde"></i>
+            <i class="fa-solid fa-credit-card icono--naranja"></i>
         </div>
         <p>Control de ingresos, cobros en mostrador, pagos por Mercado Pago y proyección de vencimientos.</p>
     </a>
@@ -147,7 +147,7 @@ $kpis = $kpis ?? [
     <a class="card-panel" href="/admin/configuracion">
         <div class="card-panel__header">
             <h3>Configuración del Sitio</h3>
-            <i class="fa-solid fa-gears icono--naranja"></i>
+            <i class="fa-solid fa-gears icono--verde"></i>
         </div>
         <p>Personalización de nombre, logo, portada, medios de contacto y redes sociales.</p>
     </a>
