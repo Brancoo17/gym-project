@@ -406,6 +406,8 @@ class UsuarioController {
                         'membresia_id' => (int)$resultadoMembresia['id'],
                         'monto' => $plan->precio,
                         'estado' => 'aprobado',
+                        'metodo_pago' => 'efectivo',
+                        'fecha_pago' => date('Y-m-d H:i:s'),
                         'mp_status' => 'efectivo'
                     ]);
                     $pago->guardar();

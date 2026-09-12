@@ -51,7 +51,9 @@ class PagoController {
             $pago = new Pago([
                 'membresia_id' => $membresia_id,
                 'monto' => $plan->precio,
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'metodo_pago' => 'mercadopago',
+                'fecha_pago' => date('Y-m-d H:i:s')
             ]);
             $resultadoPago = $pago->guardar();
             $pago_id = $resultadoPago['id'];
