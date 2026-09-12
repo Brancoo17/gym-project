@@ -393,7 +393,7 @@ CREATE TABLE `usuarios` (
   `telefono` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rol` enum('cliente','admin','entrenador') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cliente',
   `confirmado` tinyint(1) NOT NULL DEFAULT '0',
-  `token` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -105,7 +105,7 @@ class Usuario extends ActiveRecord {
     }
 
     public function crearToken() {
-        $this->token = uniqid();
+        $this->token = bin2hex(random_bytes(32));
     }
 
     public function comprobarPasswordAndVerificado(string $password) {

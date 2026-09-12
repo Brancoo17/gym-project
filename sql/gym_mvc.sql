@@ -24,7 +24,7 @@ CREATE TABLE usuarios (
     telefono VARCHAR(15),
     rol ENUM('cliente', 'admin', 'entrenador') NOT NULL DEFAULT 'cliente',
     confirmado TINYINT(1) NOT NULL DEFAULT 0,
-    token VARCHAR(15)
+    token VARCHAR(64)
 ) ENGINE=InnoDB;
 
 CREATE TABLE planes (
