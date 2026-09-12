@@ -6,4 +6,6 @@
 includes/mail.php
 .DS_Store
 .env
-!gym-deploy.zip
+.env.*
+*.zip
+
