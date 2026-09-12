@@ -229,6 +229,8 @@ CREATE TABLE `pagos` (
   `membresia_id` int unsigned NOT NULL,
   `monto` decimal(10,2) NOT NULL,
   `estado` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pendiente',
+  `metodo_pago` enum('mercadopago','efectivo') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'mercadopago',
+  `fecha_pago` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `mp_preference_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mp_payment_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mp_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -243,7 +245,7 @@ CREATE TABLE `pagos` (
 --
 
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-INSERT INTO `pagos` VALUES (15,15,25000.00,'aprobado','3676081453-0acd0f60-1509-48f7-b52c-577aaa8049f5','177250433437','approved'),(16,16,18000.00,'aprobado','3676081453-3e0ac8a9-6bc1-4fa8-b18a-781be8b03dd9','178219400834','approved'),(17,17,15000.00,'aprobado','3676081453-04ec54b0-5398-485b-9b8a-5ce0762f65ab','177262991951','approved'),(18,18,20000.00,'aprobado','3676081453-1517ab29-2d3e-47ce-b9c8-cab0ce274613','177263485207','approved'),(19,19,20000.00,'aprobado','3676081453-97edbe46-ebed-4b99-89f0-3fc2b4e33fcd','177263702739','approved'),(22,22,25000.00,'aprobado','3676081453-366b67d5-05fa-40ae-b31d-595af31ad11b','177408079859','approved'),(23,23,18000.00,'aprobado','3676081453-1fa6752b-d944-4b02-b3e8-78e54fdafa72','178379288062','approved');
+INSERT INTO `pagos` VALUES (15,15,25000.00,'aprobado','mercadopago','2026-09-09 12:00:00','3676081453-0acd0f60-1509-48f7-b52c-577aaa8049f5','177250433437','approved'),(16,16,18000.00,'aprobado','mercadopago','2026-09-09 12:00:00','3676081453-3e0ac8a9-6bc1-4fa8-b18a-781be8b03dd9','178219400834','approved'),(17,17,15000.00,'aprobado','mercadopago','2026-09-10 12:00:00','3676081453-04ec54b0-5398-485b-9b8a-5ce0762f65ab','177262991951','approved'),(18,18,20000.00,'aprobado','mercadopago','2026-09-10 12:00:00','3676081453-1517ab29-2d3e-47ce-b9c8-cab0ce274613','177263485207','approved'),(19,19,20000.00,'aprobado','mercadopago','2026-09-10 12:00:00','3676081453-97edbe46-ebed-4b99-89f0-3fc2b4e33fcd','177263702739','approved'),(22,22,25000.00,'aprobado','mercadopago','2026-09-10 12:00:00','3676081453-366b67d5-05fa-40ae-b31d-595af31ad11b','177408079859','approved'),(23,23,18000.00,'aprobado','mercadopago','2026-09-10 12:00:00','3676081453-1fa6752b-d944-4b02-b3e8-78e54fdafa72','178379288062','approved');
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 
 --

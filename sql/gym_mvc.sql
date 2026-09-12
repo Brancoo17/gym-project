@@ -55,6 +55,8 @@ CREATE TABLE pagos (
     membresia_id INT UNSIGNED NOT NULL,
     monto DECIMAL(10,2) NOT NULL,
     estado VARCHAR(30) NOT NULL DEFAULT 'pendiente',
+    metodo_pago ENUM('mercadopago', 'efectivo') NOT NULL DEFAULT 'mercadopago',
+    fecha_pago DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     mp_preference_id VARCHAR(100),
     mp_payment_id VARCHAR(100),
     mp_status VARCHAR(50),
